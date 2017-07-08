@@ -57,7 +57,6 @@ CLASS lcl_adler32 IMPLEMENTATION.
 
     DATA: lv_index TYPE i,
           lv_a     TYPE i VALUE 1,
-          lv_n     TYPE i,
           lv_b     TYPE i VALUE 0,
           lv_x     TYPE x LENGTH 2,
           lv_ca    TYPE c LENGTH 4,
@@ -76,13 +75,10 @@ CLASS lcl_adler32 IMPLEMENTATION.
 * instead of allowing a fixed number of additions before running MOD, then
 * just compare value of lv_b, this is 1 operation less than comparing and adding
 * which will run faster on the ABAP VM
-*      IF lv_n = lc_max.
       IF lv_b > lc_max_b.
         lv_a = lv_a MOD lc_adler.
         lv_b = lv_b MOD lc_adler.
-*        lv_n = 0.
       ENDIF.
-*      lv_n = lv_n + 1.
     ENDDO.
 
     lv_a = lv_a MOD lc_adler.
